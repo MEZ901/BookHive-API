@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Book;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,17 @@ class BookFactory extends Factory
      */
     public function definition()
     {
+        do {
+            $location = fake()->regexify('[A-Z][0-9]');
+        } while (Book::where('location', $location)->exists());
+
         return [
-            //
+            'isbn' => fake()->isbn13(),
+            'title' => fake()->word(),
+            'date_publication' => fake()->dateTime(),
+            'number_pages' => fake()->randomNumber(4, false),
+            'location' => $location,
+            'content' => fake()->paragraph(5, true),
         ];
     }
 }

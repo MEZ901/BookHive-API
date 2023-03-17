@@ -11,9 +11,11 @@ class Book extends Model
     protected $fillable = [
         "isbn",
         "title",
+        "content",
         "date_publication",
         "number_pages",
-        "auteur_id",
+        "status_id",
+        "author_id",
         "collection_id",
         "genre_id"
     ];
@@ -29,5 +31,9 @@ class Book extends Model
     
     public function genre(){
         return $this->belongsTo(Genre::class);
+    }
+
+    public function status() {
+        return $this->belongsTo(Status::class);
     }
 }

@@ -44,9 +44,10 @@ class GenreSeeder extends Seeder
             'Travel',
             'Young Adult'
         ];
-        foreach ($genres as $gnere) {
+        
+        foreach ($genres as $genre) {
             Genre::create([
-                'name' => $gnere
+                'name' => $genre
             ]);
         }
     }

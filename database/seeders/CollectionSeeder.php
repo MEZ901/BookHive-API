@@ -46,6 +46,7 @@ class CollectionSeeder extends Seeder
             'The Gentleman Bastard Series',
             'The Malazan Book of the Fallen Series'
         ];
+        
         foreach ($collections as $collection) {
             Collection::create([
                 'name' => $collection

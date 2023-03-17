@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date("date_publication");
             $table->integer("number_pages");
             $table->string("location")->unique()->nullable();
-            $table->text('content');
+            $table->longText('content');
             $table->foreignId("status_id")->constrained();
             $table->foreignId("author_id")->constrained();
             $table->foreignId("genre_id")->constrained();
