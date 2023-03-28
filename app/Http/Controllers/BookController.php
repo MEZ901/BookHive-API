@@ -70,9 +70,15 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBookRequest $request, Book $book)
+    public function update(UpdateBookRequest $request, $isbn): \Illuminate\Http\JsonResponse
     {
-        //
+        $book = Book::where('isbn', $isbn)->first();
+        $book->update($request->all());
+        return response()->json([
+            "status" => true,
+            "message" => "Book has been updated!",
+            "results" => new BookResource($book)
+        ]);
     }
 
     /**
@@ -90,7 +96,7 @@ class BookController extends Controller
                 "status" => true,
                 "message" => "Book has been deleted !"
             ]);
-        } 
+        }
         return response()->json([
             "status" => false,
             "message" => "Book not found !"

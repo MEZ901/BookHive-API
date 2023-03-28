@@ -13,7 +13,7 @@ class UpdateBookRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class UpdateBookRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "isbn" => ['sometimes','required','integer','unique:books'] ,
+            "title" => ['sometimes','required','string'],
+            "content" => ['sometimes','required','string'],
+            "status_id" => ['sometimes','required','exists:statuses,id'],
+            "date_publication" => ['sometimes','required','date'],
+            "number_pages" => ['sometimes','required','integer'],
+            "author_id" => ['sometimes','required','exists:authors,id'],
+            "collection_id" => ['sometimes','required','exists:collections,id'],
+            "genre_id" => ['sometimes','required','exists:genres,id']
         ];
     }
 }
