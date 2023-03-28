@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreBookRequest extends FormRequest
@@ -24,7 +25,7 @@ class StoreBookRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
         ];
     }
 }

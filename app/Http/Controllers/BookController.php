@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Http\Resources\Book\BookResource;
+use App\Http\Resources\Book\BookCollection;
 
 class BookController extends Controller
 {
@@ -13,19 +16,20 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request): \Illuminate\Http\JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $books = null;
+        if($request->has('genre')){
+            $books = Book::whereHas('genre', function ($query) use ($request) {
+                $query->where('name', $request->genre);
+            })->get();
+        }else{
+            $books = Book::all();
+        }
+        return response()->json([
+            "message" => true,
+            "results" => new BookCollection($books)
+        ]);
     }
 
     /**
@@ -34,9 +38,14 @@ class BookController extends Controller
      * @param  \App\Http\Requests\StoreBookRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBookRequest $request)
+    public function store(StoreBookRequest $request): \Illuminate\Http\JsonResponse
     {
-        //
+        $books = Book::create($request->all());
+        return response()->json([
+            "status" => true,
+            "message" => "Book has been added !",
+            "results" => new BookResource($books)
+        ]);
     }
 
     /**
