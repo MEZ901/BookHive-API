@@ -54,9 +54,13 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($isbn): \Illuminate\Http\JsonResponse
     {
-        //
+        $book = Book::where('isbn', $isbn)->first();
+        return response()->json([
+            "status" => true,
+            "results" => new BookResource($book)
+        ]);
     }
 
     /**

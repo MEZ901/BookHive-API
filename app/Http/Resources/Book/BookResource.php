@@ -14,6 +14,18 @@ class BookResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        $schema = [
+            "isbn" => $this->isbn,
+            "title" => $this->title,
+            "content" => $this->content,
+            "status" => $this->status->name,
+            "datePublication" => $this->date_publication,
+            "numberPages" => $this->number_pages,
+            "author" => $this->author_id,
+            "collection" => $this->collection->name,
+            "genre" => $this->genre->name,
+        ];
+        $this->deleted_at != null ? $schema += ['deletedAt' => $this->deleted_at] : null;
+        return $schema;
     }
 }

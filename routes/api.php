@@ -23,4 +23,4 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
 });
 
-Route::apiResource('books', BookController::class);
+Route::apiResource('books', BookController::class)->parameters(['books' => 'isbn']);
