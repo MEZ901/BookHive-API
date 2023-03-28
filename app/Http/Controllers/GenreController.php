@@ -46,9 +46,12 @@ class GenreController extends Controller
      * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function show(Genre $genre)
+    public function show(Genre $genre): \Illuminate\Http\JsonResponse
     {
-        //
+        return response()->json([
+            "status" => true,
+            "results" => new GenreResource($genre)
+        ],200);
     }
 
     /**
