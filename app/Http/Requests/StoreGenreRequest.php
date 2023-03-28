@@ -23,10 +23,8 @@ class StoreGenreRequest extends FormRequest
      */
     public function rules()
     {
-        $validation = ['required'];
-        if($this->isMethod('post')) array_push($validation,'unique:genres');
         return [
-            'name' => $validation
+            'name' => ['required','unique:genres']
         ];
     }
 }

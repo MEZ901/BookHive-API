@@ -55,26 +55,20 @@ class GenreController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Genre  $genre
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Genre $genre)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateGenreRequest  $request
      * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateGenreRequest $request, Genre $genre)
+    public function update(UpdateGenreRequest $request, Genre $genre): \Illuminate\Http\JsonResponse
     {
-        //
+        $genre->update($request->all());
+        return response()->json([
+            "status" => true,
+            "message" => "Genre has been updated successfully",
+            "results" => new GenreResource($genre)
+        ],200);
     }
 
     /**
