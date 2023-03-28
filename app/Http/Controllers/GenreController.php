@@ -77,8 +77,12 @@ class GenreController extends Controller
      * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Genre $genre)
+    public function destroy(Genre $genre): \Illuminate\Http\JsonResponse
     {
-        //
+        $genre->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'Genre deleted successfully'
+        ], 200);
     }
 }
