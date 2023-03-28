@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Genre;
 use App\Http\Requests\StoreGenreRequest;
 use App\Http\Requests\UpdateGenreRequest;
+use App\Http\Resources\Genres\GenreResource;
 use App\Http\Resources\Genres\GenreCollection;
 
 class GenreController extends Controller
@@ -24,24 +25,19 @@ class GenreController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreGenreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreGenreRequest $request)
+    public function store(StoreGenreRequest $request): \Illuminate\Http\JsonResponse
     {
-        //
+        $genre = Genre::create($request->all());
+        return response()->json([
+            "status" => true,
+            "message" => "genre added successfully",
+            "results" => new GenreResource($genre)
+        ],201);
     }
 
     /**
