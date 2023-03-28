@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\GenreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,5 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::apiResource('books', BookController::class)->parameters(['books' => 'isbn']);
+
+Route::apiResource('genres', GenreController::class);

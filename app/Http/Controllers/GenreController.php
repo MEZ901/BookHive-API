@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Genre;
 use App\Http\Requests\StoreGenreRequest;
 use App\Http\Requests\UpdateGenreRequest;
+use App\Http\Resources\Genres\GenreCollection;
 
 class GenreController extends Controller
 {
@@ -13,9 +14,13 @@ class GenreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
-        //
+        $genres = Genre::all();
+        return response()->json([
+            "status" => true,
+            "results" => new GenreCollection($genres)
+        ],200);
     }
 
     /**
