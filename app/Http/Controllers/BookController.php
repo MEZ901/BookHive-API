@@ -64,17 +64,6 @@ class BookController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Book $book)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateBookRequest  $request
@@ -92,8 +81,19 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($isbn): \Illuminate\Http\JsonResponse
     {
-        //
+        $book = Book::where('isbn', $isbn)->first();
+        if ($book) {
+            $book->delete();
+            return response()->json([
+                "status" => true,
+                "message" => "Book has been deleted !"
+            ]);
+        } 
+        return response()->json([
+            "status" => false,
+            "message" => "Book not found !"
+        ]);
     }
 }
