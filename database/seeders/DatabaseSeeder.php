@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
             GenreSeeder::class,
             CollectionSeeder::class,
             StatusSeeder::class,
-            AuthorSeeder::class
+            AuthorSeeder::class,
+            PermissionSeeder::class,
+            RoleSeeder::class,
         ]);
     }
 }
