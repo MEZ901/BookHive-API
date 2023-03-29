@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\GenreController;
 
 /*
@@ -28,11 +29,6 @@ Route::apiResource('books', BookController::class)->parameters(['books' => 'isbn
 
 Route::apiResource('genres', GenreController::class);
 
-// Route::controller(App\Http\Controllers\BookController::class)->group(function () {
-//     Route::get('books', 'index')->middleware(['auth:api','permission:list books']);
-//     Route::get('book/{id}', 'show')->middleware(['auth:api','permission:list books']);
-//     Route::post('book', 'store')->middleware(['auth:api','permission:add book']);
-//     Route::put('books/{id}', 'update')->middleware(['auth:api','permission:edit book']);
-//     Route::delete('book/{id}', 'destroy')->middleware(['auth:api','permission:delete book']);
-//     Route::get('book/category/{id}', 'filter')->middleware(['auth:api','permission:filter books']);
-// });
+Route::get('users', RoleController::class . '@users');
+
+Route::post('switch-user-role/{user}', RoleController::class . '@switchUserRole');

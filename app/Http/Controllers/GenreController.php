@@ -11,11 +11,11 @@ use App\Http\Resources\Genres\GenreCollection;
 class GenreController extends Controller
 {
     public function __construct(){
-        $this->middleware(['can:show genres'])->only(['index', 'show']);
-        $this->middleware(['can:show genre'])->only('show');
-        $this->middleware(['can:add genre'])->only('store');
-        $this->middleware(['can:edit genre'])->only('update');
-        $this->middleware(['can:delete genre'])->only('destroy');
+        $this->middleware(['auth:api','can:show genres'])->only(['index', 'show']);
+        $this->middleware(['auth:api','can:show genre'])->only('show');
+        $this->middleware(['auth:api','can:add genre'])->only('store');
+        $this->middleware(['auth:api','can:edit genre'])->only('update');
+        $this->middleware(['auth:api','can:delete genre'])->only('destroy');
     }
     /**
      * Display a listing of the resource.

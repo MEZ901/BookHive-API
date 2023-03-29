@@ -13,11 +13,11 @@ class BookController extends Controller
 {
 
     public function __construct(){
-        $this->middleware(['can:show books'])->only(['index', 'show']);
-        $this->middleware(['can:show book'])->only('show');
-        $this->middleware(['can:add book'])->only('store');
-        $this->middleware(['can:edit book'])->only('update');
-        $this->middleware(['can:delete book'])->only('destroy');
+        $this->middleware(['auth:api','can:show books'])->only(['index', 'show']);
+        $this->middleware(['auth:api','can:show book'])->only('show');
+        $this->middleware(['auth:api','can:add book'])->only('store');
+        $this->middleware(['auth:api','can:edit book'])->only('update');
+        $this->middleware(['auth:api','can:delete book'])->only('destroy');
     }
     /**
      * Display a listing of the resource.
